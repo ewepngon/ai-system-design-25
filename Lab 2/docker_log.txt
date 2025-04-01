@@ -1,0 +1,81 @@
+root@a8aeab029f3d:/app2# python
+Python 3.9.21 (main, Mar 17 2025, 23:19:14)
+[GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from base_iris import load_local, build, train, score
+2025-04-01 10:03:44.274488: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-04-01 10:03:44.275385: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-04-01 10:03:44.281000: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-04-01 10:03:44.296530: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1743501824.314321      63 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1743501824.319788      63 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1743501824.332996      63 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1743501824.333054      63 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1743501824.333058      63 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1743501824.333060      63 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-04-01 10:03:44.337673: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Starting up the extended Iris model service
+>>> dataset_id = load_local()
+Loading extended Iris dataset...
+Dataset Columns: ['species', 'elevation', 'soil_type', 'sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'sepal_area', 'petal_area', 'sepal_aspect_ratio', 'petal_aspect_ratio', 'sepal_to_petal_length_ratio', 'sepal_to_petal_width_ratio', 'sepal_petal_length_diff', 'sepal_petal_width_diff', 'petal_curvature_mm', 'petal_texture_trichomes_per_mm2', 'leaf_area_cm2', 'sepal_area_sqrt', 'petal_area_sqrt', 'area_ratios']
+Dataset Shape: (1200, 21)
+>>> model_id = build()
+2025-04-01 10:04:30.356907: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+>>> train(model_id, dataset_id)
+Feature Shape: (1200, 20), Target Shape: (1200, 3)
+Epoch 1/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 1s 4ms/step - accuracy: 0.3217 - loss: 2.6424 
+Epoch 2/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.7331 - loss: 0.6026 
+Epoch 3/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8924 - loss: 0.4067 
+Epoch 4/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.9366 - loss: 0.2914 
+Epoch 5/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9519 - loss: 0.2105 
+Epoch 6/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.9660 - loss: 0.1716 
+Epoch 7/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.9720 - loss: 0.1401 
+Epoch 8/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9768 - loss: 0.1151 
+Epoch 9/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.9793 - loss: 0.0992 
+Epoch 10/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9619 - loss: 0.1001 
+Epoch 11/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.9770 - loss: 0.0747 
+Epoch 12/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9745 - loss: 0.0847 
+Epoch 13/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.9869 - loss: 0.0562 
+Epoch 14/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9859 - loss: 0.0469 
+Epoch 15/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.9922 - loss: 0.0465 
+Epoch 16/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9873 - loss: 0.0510 
+Epoch 17/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9822 - loss: 0.0607 
+Epoch 18/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9859 - loss: 0.0452 
+Epoch 19/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.9765 - loss: 0.0694 
+Epoch 20/20
+60/60 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.9797 - loss: 0.0431 
+{'accuracy': [0.4208333194255829, 0.7822916507720947, 0.8979166746139526, 0.9333333373069763, 0.9624999761581421, 0.965624988079071, 0.971875011920929, 0.9729166626930237, 0.971875011920929, 0.9729166626930237, 0.9791666865348816, 0.9802083373069763, 0.9885416626930237, 0.9781249761581421, 0.987500011920929, 0.9854166507720947, 0.981249988079071, 0.9750000238418579, 0.9791666865348816, 0.9833333492279053], 'loss': [1.6643085479736328, 0.5447303056716919, 0.3740338683128357, 0.2782120406627655, 0.19345416128635406, 0.1658187359571457, 0.13045059144496918, 0.10879597812891006, 0.10272148251533508, 0.083818219602108, 0.07023446261882782, 0.0698864534497261, 0.056928109377622604, 0.062203649431467056, 0.04992784932255745, 0.047189418226480484, 0.05567627772688866, 0.0636741891503334, 0.058847662061452866, 0.040383197367191315]}
+Test loss: 0.05891015753149986
+Test accuracy: 0.9833333492279053
+{'accuracy': [0.4208333194255829, 0.7822916507720947, 0.8979166746139526, 0.9333333373069763, 0.9624999761581421, 0.965624988079071, 0.971875011920929, 0.9729166626930237, 0.971875011920929, 0.9729166626930237, 0.9791666865348816, 0.9802083373069763, 0.9885416626930237, 0.9781249761581421, 0.987500011920929, 0.9854166507720947, 0.981249988079071, 0.9750000238418579, 0.9791666865348816, 0.9833333492279053], 'loss': [1.6643085479736328, 0.5447303056716919, 0.3740338683128357, 0.2782120406627655, 0.19345416128635406, 0.1658187359571457, 0.13045059144496918, 0.10879597812891006, 0.10272148251533508, 0.083818219602108, 0.07023446261882782, 0.0698864534497261, 0.056928109377622604, 0.062203649431467056, 0.04992784932255745, 0.047189418226480484, 0.05567627772688866, 0.0636741891503334, 0.058847662061452866, 0.040383197367191315]}
+>>> sample = [0.37, 0.92, 0.15, 0.78, 0.43, 0.61, 0.89, 0.24, 0.55, 0.73,0.11, 0.98, 0.32, 0.67, 0.21, 0.49, 0.84, 0.05, 0.76, 0.58]
+>>> print(score(model_id, sample))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/app2/base_iris.py", line 106, in score
+    raise ValueError(f"Expected 20 features, but got {len(features)}")
+ValueError: Expected 20 features, but got 1
+>>> print(score(model_id, *sample))
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 70ms/step
+Predicted class: 0
